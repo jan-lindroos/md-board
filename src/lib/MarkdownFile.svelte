@@ -36,7 +36,7 @@
 	.file {
 		margin-top: 24px;
 		padding: 24px;
-		border: 1px solid #d1d9e0;
+		border: 1px solid var(--panel-border);
 		border-radius: 10px;
 	}
 
@@ -59,7 +59,7 @@
 	}
 
 	.muted {
-		color: #59636e;
+		color: var(--muted-foreground);
 	}
 
 	.markdown-body,
@@ -102,12 +102,14 @@
 	}
 
 	@media (prefers-color-scheme: dark) {
-		.file {
-			border-color: #3d444d;
-		}
-
-		.muted {
-			color: #9198a1;
+		.markdown-body,
+		.markdown-body :global(.markdown-body) {
+			--bgColor-default: var(--page-background);
+			--bgColor-muted: #111111;
+			--bgColor-neutral-muted: #ffffff1a;
+			--fgColor-muted: var(--muted-foreground);
+			--borderColor-default: var(--panel-border);
+			--borderColor-muted: #303030b3;
 		}
 	}
 </style>

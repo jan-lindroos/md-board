@@ -25,19 +25,28 @@
 <Butterfly />
 
 <style>
+	:global(:root) {
+		color-scheme: light dark;
+		--page-background: #ffffff;
+		--page-foreground: #1f2328;
+		--muted-foreground: #59636e;
+		--panel-border: #d1d9e0;
+	}
+
 	main {
 		max-width: 720px;
 		margin: 0 auto;
 		padding: 0 1rem 4rem;
 	}
 
+	:global(html),
 	:global(body) {
-		background: #ffffff;
-		color: #1f2328;
+		background: var(--page-background);
+		color: var(--page-foreground);
 	}
 
 	:global(.text-muted) {
-		color: #59636e;
+		color: var(--muted-foreground);
 		font-size: 12px;
 		font-family: 'Monaspace Neon', monospace;
 		font-weight: 400;
@@ -50,13 +59,11 @@
 	}
 
 	@media (prefers-color-scheme: dark) {
-		:global(body) {
-			background: #0d1117;
-			color: #f0f6fc;
-		}
-
-		:global(.text-muted) {
-			color: #9198a1;
+		:global(:root) {
+			--page-background: #000000;
+			--page-foreground: #f0f6fc;
+			--muted-foreground: #a1a1a1;
+			--panel-border: #303030;
 		}
 	}
 
