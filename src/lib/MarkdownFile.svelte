@@ -84,6 +84,23 @@
 		text-underline-offset: 2px;
 	}
 
+	@media (max-width: 640px) {
+		.title {
+			font-size: 13px;
+		}
+
+		.markdown-body,
+		.markdown-body :global(.markdown-body) {
+			font-size: 15px;
+			line-height: 22px;
+		}
+
+		.markdown-body :global(h1),
+		.markdown-body :global(h2) {
+			font-size: 22px;
+		}
+	}
+
 	@media (prefers-color-scheme: dark) {
 		.file {
 			border-color: #3d444d;

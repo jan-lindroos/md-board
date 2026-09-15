@@ -43,6 +43,12 @@
 		font-weight: 400;
 	}
 
+	@media (max-width: 640px) {
+		:global(.text-muted) {
+			font-size: 13px;
+		}
+	}
+
 	@media (prefers-color-scheme: dark) {
 		:global(body) {
 			background: #0d1117;
