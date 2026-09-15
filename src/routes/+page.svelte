@@ -14,10 +14,17 @@
 	let playing = $state(false);
 
 	const readme: Promise<string> = fetch(`https://api.github.com/repos/${REPO}/readme`, {
+		cache: 'no-store',
 		headers: { Accept: 'application/vnd.github.html+json' }
-	}).then((res) => {
+	}).then(async (res) => {
 		if (!res.ok) throw new Error(`GitHub returned ${res.status}`);
-		return res.text();
+		const document = new DOMParser().parseFromString(await res.text(), 'text/html');
+		// GitHub's rendered image URLs expire, so serve our wall image locally.
+		for (const image of document.querySelectorAll('img[alt="wall"]')) {
+			image.setAttribute('src', '/wall.png');
+			image.removeAttribute('srcset');
+		}
+		return document.body.innerHTML;
 	});
 </script>
 
