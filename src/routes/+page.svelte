@@ -19,17 +19,18 @@
 	}).then(async (res) => {
 		if (!res.ok) throw new Error(`GitHub returned ${res.status}`);
 		const document = new DOMParser().parseFromString(await res.text(), 'text/html');
-		// GitHub's rendered image URLs expire, so serve our wall image locally.
+		// Omit the wall banner from the site while keeping the rest of the README live.
 		for (const image of document.querySelectorAll('img[alt="wall"]')) {
-			image.setAttribute('src', '/wall.png');
-			image.removeAttribute('srcset');
+			const link = image.closest('a');
+			image.remove();
+			if (link && !link.children.length && !link.textContent?.trim()) link.remove();
 		}
 		return document.body.innerHTML;
 	});
 </script>
 
 <svelte:head>
-	<title>jan-lindroos</title>
+	<title>Jan Lindroos</title>
 </svelte:head>
 
 <main>
