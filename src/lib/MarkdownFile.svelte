@@ -73,8 +73,6 @@
 		font-size: 21px;
 		font-weight: 600;
 		line-height: 1.2;
-		padding-bottom: 0;
-		border-bottom: 0;
 	}
 
 	.markdown-body :global(.anchor) {

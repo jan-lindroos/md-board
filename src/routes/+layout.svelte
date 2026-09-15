@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Butterfly from '$lib/Butterfly.svelte';
 	let { children } = $props();
 	let year = new Date().getFullYear();
 </script>
@@ -20,6 +21,8 @@
 
 	<div class="padding-top text-muted">© Jan Lindroos, {year}</div>
 </main>
+
+<Butterfly />
 
 <style>
 	main {
