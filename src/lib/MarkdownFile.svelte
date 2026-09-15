@@ -79,6 +79,11 @@
 		display: none;
 	}
 
+	.markdown-body :global(a) {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
 	@media (prefers-color-scheme: dark) {
 		.file {
 			border-color: #3d444d;
