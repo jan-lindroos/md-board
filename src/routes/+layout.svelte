@@ -9,15 +9,7 @@
 </svelte:head>
 
 <main>
-	<svelte:boundary>
-		{@render children()}
-		{#snippet pending()}
-			<p class="text-muted">Loading most recent info…</p>
-		{/snippet}
-		{#snippet failed(error)}
-			<p class="text-muted">Could not load content: {error instanceof Error ? error.message : String(error)}</p>
-		{/snippet}
-	</svelte:boundary>
+	{@render children()}
 
 	<div class="padding-top text-muted">© Jan Lindroos, {year}</div>
 </main>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'github-markdown-css/github-markdown.css';
 
-	let { repo, file, revision = 'HEAD' }: { repo: string; file: string; revision?: string } = $props();
+	let { repo, file, html, revision = 'HEAD' }: { repo: string; file: string; html: string; revision?: string } = $props();
 
 	const owner = $derived(repo.split('/')[0]);
 	const path = $derived(file.split('/').map(encodeURIComponent).join('/'));
@@ -10,17 +10,6 @@
 	const name = $derived(extension ? file.slice(0, -extension.length) : file);
 	const href = $derived(`https://github.com/${repository}/blob/${encodeURIComponent(revision)}/${path}`);
 
-	async function fetchInnerHTML(repository: string, path: string, revision: string): Promise<string> {
-		const res = await fetch(`https://api.github.com/repos/${repository}/contents/${path}?ref=${encodeURIComponent(revision)}`, {
-			cache: 'no-store',
-			headers: { Accept: 'application/vnd.github.html+json' }
-		});
-		if (!res.ok) throw new Error(`${decodeURIComponent(path)}: GitHub returned ${res.status}`);
-		const document = new DOMParser().parseFromString(await res.text(), 'text/html');
-		return document.body.innerHTML;
-	}
-
-	const html = $derived(await fetchInnerHTML(repository, path, revision));
 </script>
 
 <section class="file">

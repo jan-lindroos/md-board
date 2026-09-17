@@ -1,27 +1,29 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
-	// Old Firefox renders the webm's alpha channel as black, so skip it entirely.
-	const isFirefox = navigator.userAgent.includes('Firefox');
-
-	const butterfly = document.createElement('video').canPlayType('video/quicktime')
-		? '/butterfly-pingpong.mov'
-		: '/butterfly-pingpong.webm';
+	let butterfly = $state<string>();
 
 	let playing = $state(false);
 	let video = $state<HTMLVideoElement>();
 
 	onMount(() => {
-		if (!video) return;
-		video.muted = true;
-		void video.play().catch(() => {
-			// Autoplay may be blocked by the browser; keep the decoration hidden.
+		// Old Firefox renders the webm's alpha channel as black, so skip it entirely.
+		if (navigator.userAgent.includes('Firefox')) return;
+		butterfly = document.createElement('video').canPlayType('video/quicktime')
+			? '/butterfly-pingpong.mov'
+			: '/butterfly-pingpong.webm';
+		void tick().then(() => {
+			if (!video) return;
+			video.muted = true;
+			void video.play().catch(() => {
+				// Autoplay may be blocked by the browser; keep the decoration hidden.
+			});
 		});
 	});
 
 </script>
 
-{#if !isFirefox}
+{#if butterfly}
 	<!-- svelte-ignore a11y_media_has_caption -->
 	<video
 		bind:this={video}

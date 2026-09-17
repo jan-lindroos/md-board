@@ -1,6 +1,10 @@
 <script lang="ts">
 	import MarkdownFile from '$lib/MarkdownFile.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 </script>
 
-<MarkdownFile repo="jan-lindroos/jan-lindroos" file="README.md" />
-<MarkdownFile repo="jan-lindroos/jan-lindroos" file="CONTACT.md" />
+{#each data.files as file}
+	<MarkdownFile {...file} />
+{/each}
